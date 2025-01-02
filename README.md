@@ -1,5 +1,8 @@
 <div align="center">
   <h1>Image Ranker</h1>
+  
+  Maintained by [Quentin Wach](https://www.x.com/QuentinWach).
+  
   <p>
     <a href="https://opensource.org/licenses/MIT">
       <img src="https://img.shields.io/github/license/QuentinWach/image-ranker" alt="License">
