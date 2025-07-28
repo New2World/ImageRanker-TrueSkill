@@ -19,7 +19,7 @@
 ![alt text](static/header_v0_1.png)
 
 ## ✨ Core Features
-- **TrueSkill ELO algorithm.** An advanced algorithm that takes into account the uncertainty in the ratings and updates the ranks **globally** after each comparison since if $A > B$ and $B > C$ then we can infer that $A > C$. This achieves accurate results much faster than a typical ELO algorithm.
+- **[TrueSkill ELO algorithm](https://www.microsoft.com/en-us/research/wp-content/uploads/2007/01/NIPS2006_0688.pdf).** An advanced algorithm that takes into account the uncertainty in the ratings and updates the ranks **globally** after each comparison since if $A > B$ and $B > C$ then we can infer that $A > C$. This achieves accurate results much faster than a typical ELO algorithm.
 - **Various advanced ranking speedups.** 
   - **Sequential elimination.** Option to rank $N$ images in $\mathcal{O}(N)$-time rather than $\mathcal{O}(N \times (N-1)/2)$ by eliminating images from the ranking that have been down voted.
   - **Smart shuffle.** Shuffles all the images in such a way as to minimize the uncertainty of the ranking as fast as possible.
@@ -62,6 +62,8 @@ It uses Gaussian distributions to model skill levels and employs factor graphs a
 Importantly, the algorithm updates all previously ranked items simultaneously with every comparison, rather than updating only the new images. This means that the algorithm can take into account all of the information available from the comparisons, rather than just the pairwise comparisons.
 
 Thus, overall, this system allows for efficient ranking with incomplete comparison data, making it well-suited for large sets of items where exhaustive pairwise comparisons are impractical!
+
+For reference, see [Herbrich et al., "TrueSkill: A Bayesian Skill Rating System", 2007](https://www.microsoft.com/en-us/research/wp-content/uploads/2007/01/NIPS2006_0688.pdf) and [TrueSkill.org](https://trueskill.org/).
 
 ### Sequential Elimination
 You have the option to enable _sequential elimination_ to rank $N$ images in $\mathcal{O}(N)$-time rather than $\mathcal{O}(N \times (N-1)/2)$ by eliminating images from the ranking that have been down voted. This is a great option when you have a large number of images and need to rank them quickly. It's also a good first step to get a rough overview of the ranking of the images and then disable this feature to get a more precise ranking as you continue.
