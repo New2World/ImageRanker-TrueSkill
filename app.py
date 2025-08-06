@@ -43,16 +43,15 @@ def initialize_image_pairs(a=False):
     global image_pairs, current_pair_index
     image_paths = get_image_paths()
     n = len(image_paths)
-    initial_pairs = []
-    for i in range(n):
-        pair = (image_paths[i], image_paths[(i+1) % n])
-        initial_pairs.append(pair)
-    random.shuffle(initial_pairs)
-    remaining_pairs = list(itertools.combinations(image_paths, 2))
-    remaining_pairs = [pair for pair in remaining_pairs if pair not in initial_pairs]
-    image_pairs = initial_pairs + remaining_pairs
-    image_pairs = [pair for pair in image_pairs if pair[0] not in excluded_images and pair[1] not in excluded_images]
-    random.shuffle(image_pairs[n:])
+    ids = range(n)
+    initial_ids = [(i,(i+1)%n) for i in range(n)]
+    remaining_ids = list(itertools.combinations(ids, 2))
+    remaining_ids = [p for p in remaining_ids if p[1] != (p[0]+1)%n]
+    random.shuffle(initial_ids)
+    random.shuffle(remaining_ids)
+    image_ids = initial_ids + remaining_ids
+    image_pairs = [(image_paths[p[0]], image_paths[p[1]]) for p in image_ids \
+                   if image_paths[p[0]] not in excluded_images and image_paths[p[1]] not in excluded_images]
     current_pair_index = 0
 
 @app.route('/')
